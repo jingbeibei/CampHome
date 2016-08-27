@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         applicationid = pref.getLong("applicationID", 1);
         times= GetTimesAndCode.getTimes();
         code=GetTimesAndCode.getCode(times);
-
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

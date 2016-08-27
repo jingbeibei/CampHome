@@ -25,7 +25,8 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 
-import com.inuc.wifiuse.R;
+
+import com.nuc.camphome.R;
 
 import java.lang.reflect.Field;
 

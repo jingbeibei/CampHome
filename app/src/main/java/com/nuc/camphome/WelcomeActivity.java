@@ -15,7 +15,9 @@ import android.widget.ImageView;
 
 import com.nuc.camphome.beans.FlashPicture;
 import com.nuc.camphome.commons.Urls;
-import com.nuc.camphome.main.widget.LoginActivity;
+import com.nuc.camphome.main.LoginActivity;
+import com.nuc.camphome.main.MainActivity;
+
 import com.nuc.camphome.utils.GetTimesAndCode;
 import com.nuc.camphome.utils.JsonUtils;
 import com.nuc.camphome.utils.LogUtils;
