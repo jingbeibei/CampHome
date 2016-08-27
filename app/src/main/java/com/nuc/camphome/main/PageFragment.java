@@ -2,6 +2,7 @@ package com.nuc.camphome.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,13 @@ public class PageFragment extends android.support.v4.app.Fragment {
     private List<String> imageUrlList;
     private List<String> titleList;
 
-    public static PageFragment newInstance(int page) {
+    public static Fragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
         PageFragment pageFragment = new PageFragment();
+        if (page==1){
+            return new HomeFragment();
+        }
         pageFragment.setArguments(args);
         return pageFragment;
     }
@@ -48,11 +52,6 @@ public class PageFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         TextView textView = (TextView) view.findViewById(R.id.TV);
         textView.setText("Fragment #" + mPage);
-//        if (mPage==1){
-//        banner = (Banner) view.findViewById(R.id.banner);
-//        //一步搞定，设置图片就行了
-//        banner.setImages(images);
-//        banner.setBannerStyle(BannerConfig.NUM_INDICATOR);}
         imageSlideshow = (ImageSlideshow) view.findViewById(R.id.is_gallery);
         imageUrlList = new ArrayList<>();
         titleList = new ArrayList<>();

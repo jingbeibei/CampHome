@@ -4,12 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@mipmap/maintitle" />
 
+    <com.nuc.camphome.main.ImageSlideshow.ImageSlideshow
+        android:id="@+id/is_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/banner_height">
+    </com.nuc.camphome.main.ImageSlideshow.ImageSlideshow>
 
- <com.nuc.camphome.main.ImageSlideshow.ImageSlideshow
-     android:id="@+id/is_gallery"
-     android:layout_width="match_parent"
-     android:layout_height="212dp"></com.nuc.camphome.main.ImageSlideshow.ImageSlideshow>
     <TextView
         android:id="@+id/TV"
         android:layout_width="match_parent"

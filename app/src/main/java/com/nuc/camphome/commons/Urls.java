@@ -12,9 +12,11 @@ public interface Urls {
     public final static String ValidateUserURL = BaseUrl + "ValidateUser?";
     public final static String GetPsersonnelURL = BaseUrl + "GetPersonnel?";
     public final static String GetReportsForAdminURL = BaseUrl + "GetReportsForAdmin?";
-//    public final static String PostAuditReportURL = BaseUrl + "AuditReport?";
+    //    public final static String PostAuditReportURL = BaseUrl + "AuditReport?";
 //    public final static String PostReportURL = BaseUrl + "PostReport?";
     public final static String UpdatePersonnelURL = BaseUrl + "UpdatePersonnel?";
-    public final static String ChangePasswordURL=BaseUrl+"ChangePassword?";
-  public  final static String GetLastAPPURL=BaseUrl+"GetLastAPP?";
+    public final static String ChangePasswordURL = BaseUrl + "ChangePassword?";
+    public final static String GetLastAPPURL = BaseUrl + "GetLastAPP?";
+    public final static String GetPictureNewsURL = BaseUrl + "GetPictureNews?";
+
 }
