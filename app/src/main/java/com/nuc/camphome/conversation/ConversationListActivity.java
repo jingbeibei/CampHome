@@ -14,6 +14,8 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nuc.camphome.R;
+import com.nuc.camphome.beans.Conversation;
+import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.utils.GetTimesAndCode;
 import com.nuc.camphome.utils.OkHttpUtils;
 
@@ -26,10 +28,11 @@ import java.util.List;
 public class ConversationListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
-    private List<ReportBean> mData;
+    private List< Conversation> mData;
     private int pageIndex = 1;
     private ConversationAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
+
 
     private SharedPreferences pref;
     private long applicationid = 1;
@@ -73,7 +76,7 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
         if(pageIndex == 1) {
             showProgress();
         }
-        loadDate(pageIndex,5, URL);
+        loadDate(pageIndex,5, Urls.GetConversationsURL);
     }
 
     public void showProgress() {
@@ -89,11 +92,11 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
             @Override
             public void onSuccess(String response) {
                 if(response.indexOf("ReportType")>0){
-                    List<ReportBean> reportBeanList=new Gson().fromJson(response,new TypeToken< List<ReportBean>>(){}.getType());
-                    addonSuccess( reportBeanList);
+                    List< Conversation> conversationList=new Gson().fromJson(response,new TypeToken< List< Conversation>>(){}.getType());
+                    addonSuccess(  conversationList);
                 }else {
-                    List<ReportBean> reportBeanList1=new ArrayList<ReportBean>();
-                    addonSuccess(reportBeanList1);
+                    List< Conversation>  conversationList1=new ArrayList< Conversation>();
+                    addonSuccess( conversationList1);
                     // listener.onFailure("load report list failure.");
                 }
 
@@ -104,12 +107,12 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
                 addonFailure("load report list failure.");
             }
         };
-        url=URL+" &pageindex="+Index+"&pagesize="+size;
+        url=url+" &pageindex="+Index+"&pagesize="+size;
         OkHttpUtils.post(url,loadReportCallback,null);
         // OkHttpUtils.get(url, loadReportCallback);
     }
 
-    public void addonSuccess(List<ReportBean> list) {
+    public void addonSuccess(List< Conversation> list) {
         hideProgress();
         addReports(list);
     }
@@ -120,10 +123,10 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
         showLoadFailMsg();
     }
 
-    public void addReports(List<ReportBean> reportList) {
+    public void addReports(List<Conversation> reportList) {
         mAdapter.isShowFooter(true);
         if (mData == null) {
-            mData = new ArrayList<ReportBean>();
+            mData = new ArrayList< Conversation>();
         }
         mData.addAll(reportList);
         if (pageIndex == 1) {
@@ -151,7 +154,7 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
     private ConversationAdapter.OnItemClickListener mOnItemClickListener = new ConversationAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
-//            ReportBean report = mAdapter.getItem(position);
+//             Conversation report = mAdapter.getItem(position);
 //            Intent intent = new Intent(ReportListActivity.this, ReportItemActivity.class);
 //            intent.putExtra("report", report);
 //            intent.putExtra("tijiao", "2");

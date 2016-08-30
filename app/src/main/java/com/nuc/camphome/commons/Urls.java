@@ -18,5 +18,6 @@ public interface Urls {
     public final static String ChangePasswordURL = BaseUrl + "ChangePassword?";
     public final static String GetLastAPPURL = BaseUrl + "GetLastAPP?";
     public final static String GetPictureNewsURL = BaseUrl + "GetPictureNews?";
+    public final static String GetConversationsURL = BaseUrl + "GetConversations?";
 
 }
