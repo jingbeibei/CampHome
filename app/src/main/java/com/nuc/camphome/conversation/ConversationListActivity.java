@@ -1,8 +1,10 @@
 package com.nuc.camphome.conversation;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +12,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.nuc.camphome.R;
 import com.nuc.camphome.beans.Conversation;
 import com.nuc.camphome.commons.Urls;
+import com.nuc.camphome.utils.ActivityCollector;
 import com.nuc.camphome.utils.GetTimesAndCode;
 import com.nuc.camphome.utils.OkHttpUtils;
 
@@ -25,10 +32,10 @@ import java.util.List;
 /**
  * Created by 景贝贝 on 2016/8/29.
  */
-public class ConversationListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class ConversationListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private RecyclerView mRecyclerView;
-    private List< Conversation> mData;
+    private List<Conversation> mData;
     private int pageIndex = 1;
     private ConversationAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -39,17 +46,35 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
     private String times;
     private String code;
     private String username;
+    private TextView BarRightTv;
+    private TextView BarTitle;
+    private ImageView BackImage;
+    FloatingActionButton reportFAB;
+
+    private int type;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation_list);
-
+        ActivityCollector.addActivity(this);
         pref = getSharedPreferences("data", MODE_PRIVATE);
         times = GetTimesAndCode.getTimes();
         code = GetTimesAndCode.getCode(times);
         applicationid = pref.getLong("applicationID", 1);
         username = pref.getString("username", "");
+        type = Integer.parseInt(getIntent().getStringExtra("type"));
+
+        BarRightTv = (TextView) findViewById(R.id.bar_right_tv);
+        BarTitle = (TextView) findViewById(R.id.id_bar_title);
+        if (type == 1) {
+            BarTitle.setText("心理服务");
+        } else {
+            BarTitle.setText("定制谈心");
+        }
+        BackImage = (ImageView) findViewById(R.id.id_back_arrow_image);
+        reportFAB = (FloatingActionButton) findViewById(R.id.report_fab);
 
         mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.primary_light, R.color.colorAccent);
@@ -65,38 +90,58 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
         mRecyclerView.addOnScrollListener(mOnScrollListener);
 
         onRefresh();
+
+        BackImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityCollector.removeActivity(ConversationListActivity.this);
+            }
+        });
+        reportFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //184350  mRecyclerView.setSelected(false);
+                Intent intent = new Intent(ConversationListActivity.this, ReleaseRepportActivity.class);
+                intent.putExtra("flag",flag+"");
+                startActivity(intent);
+            }
+        });
     }
-//刷新
+
+    //刷新
     @Override
     public void onRefresh() {
         pageIndex = 1;
         if (mData != null) {
             mData.clear();
         }
-        if(pageIndex == 1) {
+        if (pageIndex == 1) {
             showProgress();
         }
-        loadDate(pageIndex,5, Urls.GetConversationsURL);
+        loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetConversationsURL);
     }
 
     public void showProgress() {
         mSwipeRefreshWidget.setRefreshing(true);
     }
+
     public void hideProgress() {
         mSwipeRefreshWidget.setRefreshing(false);
     }
-//通过网络获取数据
-    public void loadDate(int Index,int size,String url) {
 
-        OkHttpUtils.ResultCallback<String> loadReportCallback = new OkHttpUtils.ResultCallback<String>() {
+    //通过网络获取数据
+    public void loadDate(int Index, int size, String url) {
+
+        OkHttpUtils.ResultCallback<String> loadConversationCallback = new OkHttpUtils.ResultCallback<String>() {
             @Override
             public void onSuccess(String response) {
-                if(response.indexOf("ReportType")>0){
-                    List< Conversation> conversationList=new Gson().fromJson(response,new TypeToken< List< Conversation>>(){}.getType());
-                    addonSuccess(  conversationList);
-                }else {
-                    List< Conversation>  conversationList1=new ArrayList< Conversation>();
-                    addonSuccess( conversationList1);
+                if (response.indexOf("Title") > 0) {
+                    List<Conversation> conversationList = new GsonBuilder().serializeNulls().create().fromJson(response, new TypeToken<List<Conversation>>() {
+                    }.getType());
+                    addonSuccess(conversationList);
+                } else {
+                    List<Conversation> conversationList1 = new ArrayList<Conversation>();
+                    addonSuccess(conversationList1);
                     // listener.onFailure("load report list failure.");
                 }
 
@@ -104,15 +149,21 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
 
             @Override
             public void onFailure(Exception e) {
-                addonFailure("load report list failure.");
+                String error = "";
+                if (e.toString().contains("java.net.ConnectException")) {
+                    error = "网络连接失败";
+                } else {
+                    error = "未知错误" + e.toString();
+                }
+                addonFailure(error);
             }
         };
-        url=url+" &pageindex="+Index+"&pagesize="+size;
-        OkHttpUtils.post(url,loadReportCallback,null);
+        url = url + "times=" + times + "&code=" + code + "&applicationID=" + applicationid + "&username=" + username + " &pageindex=" + Index + "&pagesize=" + size + "&type=" + type;
+        OkHttpUtils.post(url, loadConversationCallback, null);
         // OkHttpUtils.get(url, loadReportCallback);
     }
 
-    public void addonSuccess(List< Conversation> list) {
+    public void addonSuccess(List<Conversation> list) {
         hideProgress();
         addReports(list);
     }
@@ -120,13 +171,13 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
 
     public void addonFailure(String msg) {
         hideProgress();
-        showLoadFailMsg();
+        showLoadFailMsg(msg);
     }
 
     public void addReports(List<Conversation> reportList) {
         mAdapter.isShowFooter(true);
         if (mData == null) {
-            mData = new ArrayList< Conversation>();
+            mData = new ArrayList<Conversation>();
         }
         mData.addAll(reportList);
         if (pageIndex == 1) {
@@ -139,18 +190,19 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
             }
             mAdapter.notifyDataSetChanged();
         }
-        pageIndex +=1;
+        pageIndex += 1;
     }
 
-    public void showLoadFailMsg() {
+    public void showLoadFailMsg(String error) {
         if (pageIndex == 1) {
             mAdapter.isShowFooter(false);
             mAdapter.notifyDataSetChanged();
         }
         View v1 = mRecyclerView.getRootView();
-        Snackbar.make(v1, "失败", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(v1, error, Snackbar.LENGTH_SHORT).show();
     }
-//item点击事件监听
+
+    //item点击事件监听
     private ConversationAdapter.OnItemClickListener mOnItemClickListener = new ConversationAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
@@ -182,7 +234,7 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
                 //加载更多
-                loadDate(pageIndex, 5, URL);
+                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetConversationsURL);
             }
         }
     };

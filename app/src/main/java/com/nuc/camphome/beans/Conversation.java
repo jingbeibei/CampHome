@@ -36,15 +36,23 @@ public class Conversation {
     }
 
     public String getAnswer() {
+        if (Answer == null) {
+            Answer = "";
+        }
         return Answer;
     }
 
     public void setAnswer(String answer) {
-        Answer = answer;
+        if (answer.equals("null")) {
+            Answer = "";
+        } else {
+            Answer = answer;
+        }
+
     }
 
     public String getEntryTime() {
-        return EntryTime;
+        return EntryTime.substring(0, 9);
     }
 
     public void setEntryTime(String entryTime) {
@@ -52,10 +60,17 @@ public class Conversation {
     }
 
     public String getAnswerTime() {
+        if (AnswerTime != null) {
+            AnswerTime = AnswerTime.substring(0, 9);
+        }
         return AnswerTime;
     }
 
     public void setAnswerTime(String answerTime) {
-        AnswerTime = answerTime;
+        if (answerTime.equals("null")) {
+            AnswerTime = "";
+        } else {
+            AnswerTime = answerTime.substring(0, 9);
+        }
     }
 }

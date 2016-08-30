@@ -42,6 +42,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="管理"
+                android:visibility="invisible"
                 android:textColor="@color/colorWhite"
                 android:paddingTop="15dp"
                 android:textSize="18sp" />

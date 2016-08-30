@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.nuc.camphome.R;
 import com.nuc.camphome.beans.BannerPic;
 import com.nuc.camphome.commons.Urls;
+import com.nuc.camphome.conversation.ConversationListActivity;
 import com.nuc.camphome.main.ImageSlideshow.ImageSlideshow;
 import com.nuc.camphome.utils.GetTimesAndCode;
 import com.nuc.camphome.utils.OkHttpUtils;
@@ -78,10 +79,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     initData();
                 }
             }
-
             @Override
             public void onFailure(Exception e) {
-
                 e.printStackTrace();
                 String s = e.toString();
 //                Snackbar.make(loginloyout,"网络连接失败", Snackbar.LENGTH_SHORT).show();
@@ -94,7 +93,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         };
         OkHttpUtils.post(getBannerURL, getBannerCallback, null);//获取banner图片url
-
+initView(view);
         return view;
     }
 
@@ -160,6 +159,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ptzsIV = (ImageView) view.findViewById(R.id.ptzsIV);
         jnwxwIV = (ImageView) view.findViewById(R.id.jnwxwIV);
         jxIV = (ImageView) view.findViewById(R.id.jxIV);
+        ptkxIV= (ImageView) view.findViewById(R.id.ptkxIV);
         lhbIV = (ImageView) view.findViewById(R.id.lhbIV);
         szxxIV = (ImageView) view.findViewById(R.id.szxxIV);
         wlktIV = (ImageView) view.findViewById(R.id.wlktIV);
@@ -196,6 +196,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int id=view.getId();
         switch (id){
             case R.id.dztxIV:
+                Intent intent=new Intent(getActivity(), ConversationListActivity.class);
+                intent.putExtra("type","2");
+                startActivity(intent);
                 break;
             case R.id.zxjyIV:
                 break;
@@ -216,6 +219,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.zxdcIV:
                 break;
             case R.id.xlfwIV:
+                Intent xlfwIntent=new Intent(getActivity(), ConversationListActivity.class);
+                xlfwIntent.putExtra("type","1");
+                startActivity(xlfwIntent);
                 break;
             case R.id.zsscIV:
                 break;
