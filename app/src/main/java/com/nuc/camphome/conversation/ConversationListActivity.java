@@ -100,9 +100,9 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
         reportFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //184350  mRecyclerView.setSelected(false);
-                Intent intent = new Intent(ConversationListActivity.this, ReleaseRepportActivity.class);
-                intent.putExtra("flag",flag+"");
+
+                Intent intent = new Intent(ConversationListActivity.this, ReleaseConversationActivity.class);
+                intent.putExtra("type", type + "");
                 startActivity(intent);
             }
         });
