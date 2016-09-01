@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.nuc.camphome.conversation.ReleaseConversationActivity">
+
     <include layout="@layout/toolbar_mybar" />
+
     <EditText
         android:id="@+id/conversation_release_title_et"
         android:layout_width="match_parent"
@@ -15,9 +17,10 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/login"
         android:gravity="center"
-        android:textSize="@dimen/textsize_25sp"
         android:hint="标题"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="@dimen/textsize_25sp" />
+
     <EditText
         android:id="@+id/conversation_releasw_content_et"
         android:layout_width="match_parent"
@@ -29,36 +32,39 @@
         android:gravity="top|left"
         android:hint="咨询内容"
         android:lines="6"
-        android:textSize="@dimen/textsize_25sp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="10dp"
+        android:textSize="@dimen/textsize_25sp" />
+
     <LinearLayout
-android:id="@+id/instructor_ly"
+        android:id="@+id/instructor_ly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="30dp"
-        >
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <TextView
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="请选择指导员："
-            android:textSize="@dimen/textsize_25sp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            />
+            android:layout_marginLeft="10dp"
+            android:text="请选择指导员："
+            android:textSize="@dimen/textsize_25sp" />
+
         <Spinner
             android:id="@+id/Spinnerconver"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:paddingLeft="40dp"
             android:background="@drawable/login"
+            android:gravity="center"
 
-            android:gravity="center" />
+            android:paddingLeft="40dp" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/conversation_release_button"
         android:layout_width="match_parent"

@@ -19,6 +19,7 @@ public interface Urls {
     public final static String GetLastAPPURL = BaseUrl + "GetLastAPP?";
     public final static String GetPictureNewsURL = BaseUrl + "GetPictureNews?";//滚动图片
     public final static String GetConversationsURL = BaseUrl + "GetConversations?";
-    public final static String GetInstructorsURL = BaseUrl + "GetInstructors?";
+    public final static String GetInstructorsURL = BaseUrl + "GetInstructors?";//指导员
+    public final static String PostConversationURL = BaseUrl + "PostConversation?";
 
 }
