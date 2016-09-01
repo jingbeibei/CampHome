@@ -165,7 +165,7 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
 
     public void addonSuccess(List<Conversation> list) {
         hideProgress();
-        addReports(list);
+        addConversation(list);
     }
 
 
@@ -174,17 +174,17 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
         showLoadFailMsg(msg);
     }
 
-    public void addReports(List<Conversation> reportList) {
+    public void addConversation(List<Conversation> conversationList) {
         mAdapter.isShowFooter(true);
         if (mData == null) {
             mData = new ArrayList<Conversation>();
         }
-        mData.addAll(reportList);
+        mData.addAll(conversationList);
         if (pageIndex == 1) {
             mAdapter.setmDate(mData);
         } else {
             //如果没有更多数据了,则隐藏footer布局
-            if (reportList == null || reportList.size() == 0) {
+            if (conversationList == null || conversationList.size() == 0) {
                 mAdapter.isShowFooter(false);
                 Snackbar.make(mRecyclerView, "暂无更多...", Snackbar.LENGTH_SHORT).show();
             }

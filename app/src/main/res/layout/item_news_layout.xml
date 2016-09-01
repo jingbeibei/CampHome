@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="145dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="145dip"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/nuclistItemTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dip"
+            android:paddingLeft="10dip"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="标题"
+            android:textSize="@dimen/textsize_25sp" />
+
+        <ImageView
+            android:id="@+id/nucitemskimiv"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/nucskimlabel" />
+
+        <TextView
+            android:id="@+id/nucitemSkimTV"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignBottom="@id/nucitemskimiv"
+            android:layout_toRightOf="@id/nucitemskimiv"
+            android:gravity="center"
+            android:text="200"
+            android:textSize="15dip" />
+
+        <ImageView
+            android:id="@+id/nucitemRemarkiv"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_alignBottom="@id/nucitemskimiv"
+            android:layout_toRightOf="@id/nucitemSkimTV"
+            android:visibility="gone"
+            android:src="@mipmap/nucremaklabel" />
+
+        <TextView
+            android:id="@+id/nucitemRemarkTV"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignBottom="@id/nucitemskimiv"
+            android:layout_toRightOf="@id/nucitemRemarkiv"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="2004"
+            android:textSize="15dip" />
+
+        <TextView
+            android:id="@+id/nucitempublishTimeTV"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignBottom="@id/nucitemskimiv"
+            android:layout_marginLeft="15dip"
+            android:layout_toRightOf="@id/nucitemRemarkTV"
+            android:gravity="center"
+            android:text="200"
+            android:textSize="15dip" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/nucitemTitleIV"
+        android:layout_width="180dp"
+        android:layout_height="135dp"
+        android:layout_margin="3dip"
+        android:maxWidth="180dip"
+        android:visibility="gone"
+        android:scaleType="fitXY" />
+
+</LinearLayout>

@@ -20,6 +20,7 @@ import com.nuc.camphome.beans.BannerPic;
 import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.conversation.ConversationListActivity;
 import com.nuc.camphome.main.ImageSlideshow.ImageSlideshow;
+import com.nuc.camphome.news.NewsListActivity;
 import com.nuc.camphome.utils.GetTimesAndCode;
 import com.nuc.camphome.utils.OkHttpUtils;
 
@@ -45,6 +46,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String times;
     private String code;
     private String username;
+    private int newsType_longhubang=1;//龙虎榜
+    private int newsType_junneiwai=2;//军内外新闻
+    private int newsType_paotuankuaixun=3;//炮团快讯
+
 
     public HomeFragment() {
         super();
@@ -195,7 +200,7 @@ initView(view);
     public void onClick(View view) {
         int id=view.getId();
         switch (id){
-            case R.id.dztxIV:
+            case R.id.dztxIV://定制谈心
                 Intent intent=new Intent(getActivity(), ConversationListActivity.class);
                 intent.putExtra("type","2");
                 startActivity(intent);
@@ -204,13 +209,22 @@ initView(view);
                 break;
             case R.id.ptzsIV:
                 break;
-            case R.id.jnwxwIV:
+            case R.id.jnwxwIV://军内外新闻
+                Intent jnwxwIntent=new Intent(getActivity(), NewsListActivity.class);
+                jnwxwIntent.putExtra("type",newsType_junneiwai+"");
+                startActivity(jnwxwIntent);
                 break;
             case R.id.jxIV:
                 break;
-            case R.id.ptkxIV:
+            case R.id.ptkxIV://炮团快讯
+                Intent ptkxIntent=new Intent(getActivity(), NewsListActivity.class);
+                ptkxIntent.putExtra("type",newsType_paotuankuaixun+"");
+                startActivity(ptkxIntent);
                 break;
-            case R.id.lhbIV:
+            case R.id.lhbIV://龙虎榜
+                Intent lhbIntent=new Intent(getActivity(), NewsListActivity.class);
+               lhbIntent.putExtra("type",newsType_longhubang+"");
+                startActivity(lhbIntent);
                 break;
             case R.id.szxxIV:
                 break;
