@@ -1,5 +1,6 @@
 package com.nuc.camphome.news;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -82,11 +83,19 @@ public class NewsListActivity extends AppCompatActivity implements SwipeRefreshL
         mLayoutManager = new LinearLayoutManager(this);//设置布局管理器,默认垂直
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//增加或删除条目动画
+        //添加分割线
+       // mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
 
         mAdapter = new NewsAdapter(this);
         mAdapter.setOnItemClickListener(mOnItemClickListener);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(mOnScrollListener);
+        BackImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityCollector.removeActivity(NewsListActivity.this);
+            }
+        });
     }
 
     @Override
@@ -139,7 +148,7 @@ public class NewsListActivity extends AppCompatActivity implements SwipeRefreshL
             }
         };
         url = url + "times=" + times + "&code=" + code + "&applicationID=" + applicationid + "&type=" + type + " &pageindex=" + Index + "&pagesize=" + size +
-                "&loaddetails=false" + "&remarkspageindex=0&remarkspagesize=0";
+                "&loaddetails=true" + "&remarkspageindex=0&remarkspagesize=0";
         OkHttpUtils.post(url, loadConversationCallback, null);
         // OkHttpUtils.get(url, loadReportCallback);
     }
@@ -187,13 +196,11 @@ public class NewsListActivity extends AppCompatActivity implements SwipeRefreshL
     private NewsAdapter.OnItemClickListener mOnItemClickListener = new NewsAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
-//             Conversation report = mAdapter.getItem(position);
-//            Intent intent = new Intent(ReportListActivity.this, ReportItemActivity.class);
-//            intent.putExtra("report", report);
-//            intent.putExtra("tijiao", "2");
-//
-//            startActivity(intent);
-//            Toast.makeText()
+            News news = mAdapter.getItem(position);
+            Intent intent = new Intent(NewsListActivity.this,NewsDetailedActivity.class);
+            intent.putExtra("news",news);
+            intent.putExtra("type",type+"");
+            startActivity(intent);
 
         }
     };

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nuc.camphome.R;
 import com.nuc.camphome.beans.BannerPic;
+import com.nuc.camphome.chat.ChatActivity;
 import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.conversation.ConversationListActivity;
 import com.nuc.camphome.main.ImageSlideshow.ImageSlideshow;
@@ -214,7 +215,10 @@ initView(view);
                 jnwxwIntent.putExtra("type",newsType_junneiwai+"");
                 startActivity(jnwxwIntent);
                 break;
-            case R.id.jxIV:
+            case R.id.jxIV://军信
+                Intent jxIntent=new Intent(getActivity(), ChatActivity.class);
+                jxIntent.putExtra("url",Urls.ChatURL+username);
+                startActivity(jxIntent);
                 break;
             case R.id.ptkxIV://炮团快讯
                 Intent ptkxIntent=new Intent(getActivity(), NewsListActivity.class);

@@ -22,5 +22,5 @@ public interface Urls {
     public final static String GetInstructorsURL = BaseUrl + "GetInstructors?";//指导员
     public final static String PostConversationURL = BaseUrl + "PostConversation?";
     public final static String GetNewsTitleURL = BaseUrl + "GetNewsTitle?";
-
+    public final static String ChatURL = "http://202.207.177.28:88/Chats/Home/chat?username=";
 }

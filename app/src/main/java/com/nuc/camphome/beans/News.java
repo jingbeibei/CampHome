@@ -1,9 +1,11 @@
 package com.nuc.camphome.beans;
 
+import java.io.Serializable;
+
 /**
  * Created by 景贝贝 on 2016/9/1.
  */
-public class News {
+public class News implements Serializable{
     private  int ID;
     private String Title;
     private String PublishTime;
