@@ -20,6 +20,7 @@ import com.nuc.camphome.beans.BannerPic;
 import com.nuc.camphome.chat.ChatActivity;
 import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.conversation.ConversationListActivity;
+import com.nuc.camphome.mailbox.ChiefMailboxActivity;
 import com.nuc.camphome.main.ImageSlideshow.ImageSlideshow;
 import com.nuc.camphome.news.NewsListActivity;
 import com.nuc.camphome.utils.GetTimesAndCode;
@@ -230,7 +231,9 @@ initView(view);
                lhbIntent.putExtra("type",newsType_longhubang+"");
                 startActivity(lhbIntent);
                 break;
-            case R.id.szxxIV:
+            case R.id.szxxIV://首长信箱
+                Intent szxxIntent=new Intent(getActivity(), ChiefMailboxActivity.class);
+                startActivity(szxxIntent);
                 break;
             case R.id.wlktIV:
                 break;

@@ -33,7 +33,9 @@
         <activity android:name=".conversation.ReleaseConversationActivity" />
         <activity android:name=".news.NewsListActivity" />
         <activity android:name=".news.NewsDetailedActivity" />
-        <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".chat.ChatActivity" />
+        <activity android:name=".mailbox.ChiefMailboxActivity" />
+        <activity android:name=".mailbox.LetterDetailedActivity"></activity>
     </application>
 
 </manifest>
