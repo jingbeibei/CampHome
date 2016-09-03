@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -88,6 +89,13 @@ public class ChiefMailboxActivity extends AppCompatActivity implements SwipeRefr
                 ActivityCollector.removeActivity(ChiefMailboxActivity.this);
             }
         });
+        BarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ChiefMailboxActivity.this,WriteLetterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -119,6 +127,7 @@ public class ChiefMailboxActivity extends AppCompatActivity implements SwipeRefr
                 if (response.indexOf("Title") > 0) {
                     List<Letter> letterList = new GsonBuilder().serializeNulls().create().fromJson(response, new TypeToken<List<Letter>>() {
                     }.getType());
+                    Log.i("信箱",letterList+"");
                     addonSuccess(letterList);
                 } else {
                     List<Letter> LetterList1 = new ArrayList<Letter>();
