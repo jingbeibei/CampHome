@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nuc.camphome.suggest.SuggestDetailedActivity">
+
+    <include layout="@layout/toolbar_mybar"></include>
+
+    <TextView
+        android:id="@+id/suggest_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="标题"
+        android:textSize="@dimen/textsize_25sp" />
+
+    <TextView
+        android:id="@+id/suggest_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="内容"
+        android:textSize="@dimen/sn_20sp" />
+
+    <TextView
+        android:id="@+id/suggest_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:text="2016-09-03"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="匿名评论："
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textsize_25sp" />
+
+    <TextView
+        android:id="@+id/suggest_remarks_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/textsize_25sp"
+
+        />
+
+    <EditText
+        android:id="@+id/suggest_myremark_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="评论"
+        android:textSize="@dimen/textsize_25sp" />
+
+    <Button
+        android:id="@+id/suggest_release_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/login_button"
+        android:text="提交"
+        android:textSize="@dimen/textsize_25sp" />
+</LinearLayout>

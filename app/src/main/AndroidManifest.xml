@@ -36,7 +36,15 @@
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".mailbox.ChiefMailboxActivity" />
         <activity android:name=".mailbox.LetterDetailedActivity" />
-        <activity android:name=".mailbox.WriteLetterActivity"></activity>
+        <activity android:name=".mailbox.WriteLetterActivity" />
+        <activity
+            android:name=".medial.MedialListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".medial.MedialActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".suggest.SuggestListActivity" />
+        <activity android:name=".suggest.SuggestDetailedActivity"></activity>
     </application>
 
 </manifest>

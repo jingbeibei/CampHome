@@ -22,7 +22,9 @@ import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.conversation.ConversationListActivity;
 import com.nuc.camphome.mailbox.ChiefMailboxActivity;
 import com.nuc.camphome.main.ImageSlideshow.ImageSlideshow;
+import com.nuc.camphome.medial.MedialListActivity;
 import com.nuc.camphome.news.NewsListActivity;
+import com.nuc.camphome.suggest.SuggestListActivity;
 import com.nuc.camphome.utils.GetTimesAndCode;
 import com.nuc.camphome.utils.OkHttpUtils;
 
@@ -52,6 +54,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private int newsType_junneiwai=2;//军内外新闻
     private int newsType_paotuankuaixun=3;//炮团快讯
 
+    private int medialType_wangluoketang=1;//网络课堂
+    private int medialType_zixuanjiaoyu=2;//自选教育
+    private int medialType_yuleyingyin=3;//娱乐影音
 
     public HomeFragment() {
         super();
@@ -207,7 +212,11 @@ initView(view);
                 intent.putExtra("type","2");
                 startActivity(intent);
                 break;
-            case R.id.zxjyIV:
+            case R.id.zxjyIV://自选教育
+                Intent zxjyIntent=new Intent(getActivity(), MedialListActivity.class);
+                zxjyIntent.putExtra("type",medialType_zixuanjiaoyu+"");
+                startActivity(zxjyIntent);
+
                 break;
             case R.id.ptzsIV:
                 break;
@@ -235,18 +244,27 @@ initView(view);
                 Intent szxxIntent=new Intent(getActivity(), ChiefMailboxActivity.class);
                 startActivity(szxxIntent);
                 break;
-            case R.id.wlktIV:
+            case R.id.wlktIV://网络课堂
+                Intent wlktIntent=new Intent(getActivity(), MedialListActivity.class);
+                wlktIntent.putExtra("type",medialType_wangluoketang+"");
+                startActivity(wlktIntent);
                 break;
-            case R.id.zxdcIV:
+            case R.id.zxdcIV://在线调查
+                Intent zxdcIntent=new Intent(getActivity(), SuggestListActivity.class);
+
+                startActivity(zxdcIntent);
                 break;
-            case R.id.xlfwIV:
+            case R.id.xlfwIV://心理服务
                 Intent xlfwIntent=new Intent(getActivity(), ConversationListActivity.class);
                 xlfwIntent.putExtra("type","1");
                 startActivity(xlfwIntent);
                 break;
             case R.id.zsscIV:
                 break;
-            case R.id.ylyyIV:
+            case R.id.ylyyIV://娱乐影音
+                Intent ylyyIntent=new Intent(getActivity(), MedialListActivity.class);
+                ylyyIntent.putExtra("type",medialType_yuleyingyin+"");
+                startActivity(ylyyIntent);
                 break;
 
         }

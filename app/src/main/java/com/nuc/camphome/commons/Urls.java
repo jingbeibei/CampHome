@@ -25,4 +25,7 @@ public interface Urls {
     public final static String ChatURL = "http://202.207.177.28:88/Chats/Home/chat?username=";
     public final static String GetLetterURL = BaseUrl + "GetLetters?";
     public final static String PostLetterURL = BaseUrl + "PostLetter?";
+    public final static String GetMediasURL = BaseUrl + "GetMedias?";
+    public final static String GetSuggestThemesURL = BaseUrl + "GetSuggestThemes?";
+    public final static String PostSuggestURL = BaseUrl + "PostSuggest?";
 }

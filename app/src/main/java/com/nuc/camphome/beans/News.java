@@ -12,6 +12,15 @@ public class News implements Serializable{
     private String Contents;
     private int Hits;
     private String TitlePicture;
+    private String FileUrl;//视频文件路径
+
+    public String getFileUrl() {
+        return FileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        FileUrl = fileUrl;
+    }
 
     public int getID() {
         return ID;
