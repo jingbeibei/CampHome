@@ -161,6 +161,9 @@ public class SuggestListActivity extends AppCompatActivity implements SwipeRefre
         }
         mData.addAll(suggestThems);
         if (pageIndex == 1) {
+            if(suggestThems.size()<Urls.PAZE_SIZE){
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmDate(mData);
         } else {
             //如果没有更多数据了,则隐藏footer布局

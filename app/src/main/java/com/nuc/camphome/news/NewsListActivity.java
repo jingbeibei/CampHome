@@ -171,6 +171,9 @@ public class NewsListActivity extends AppCompatActivity implements SwipeRefreshL
         }
         mData.addAll(newsList);
         if (pageIndex == 1) {
+            if(newsList.size()<Urls.PAZE_SIZE){
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmDate(mData);
         } else {
             //如果没有更多数据了,则隐藏footer布局
