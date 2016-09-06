@@ -52,7 +52,7 @@ public class Conversation {
     }
 
     public String getEntryTime() {
-        return EntryTime.substring(0, 9);
+        return EntryTime.substring(0, 10);
     }
 
     public void setEntryTime(String entryTime) {
@@ -61,7 +61,7 @@ public class Conversation {
 
     public String getAnswerTime() {
         if (AnswerTime != null) {
-            AnswerTime = AnswerTime.substring(0, 9);
+            AnswerTime = AnswerTime.substring(0, 10);
         }
         return AnswerTime;
     }
@@ -70,7 +70,7 @@ public class Conversation {
         if (answerTime.equals("null")) {
             AnswerTime = "";
         } else {
-            AnswerTime = answerTime.substring(0, 9);
+            AnswerTime = answerTime.substring(0, 10);
         }
     }
 }

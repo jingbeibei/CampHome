@@ -169,6 +169,9 @@ public class MedialListActivity extends AppCompatActivity implements SwipeRefres
         }
         mData.addAll(newsList);
         if (pageIndex == 1) {
+            if(newsList.size()<Urls.PAZE_SIZE){
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmDate(mData);
         } else {
             //如果没有更多数据了,则隐藏footer布局
@@ -178,6 +181,7 @@ public class MedialListActivity extends AppCompatActivity implements SwipeRefres
             }
             mAdapter.notifyDataSetChanged();
         }
+
         pageIndex += 1;
     }
 
@@ -220,7 +224,7 @@ public class MedialListActivity extends AppCompatActivity implements SwipeRefres
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
                 //加载更多
-                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetConversationsURL);
+                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetMediasURL);
             }
         }
     };

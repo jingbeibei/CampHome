@@ -44,7 +44,16 @@
             android:name=".medial.MedialActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".suggest.SuggestListActivity" />
-        <activity android:name=".suggest.SuggestDetailedActivity"></activity>
+        <activity android:name=".suggest.SuggestDetailedActivity" />
+        <activity android:name=".column.ColumnsListActivity" />
+        <activity android:name=".column.ColumnListActivity" />
+        <activity android:name=".column.PaperDetailedActivity" />
+        <activity
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".main.personalcenter.ModifyDateActivity" />
+        <activity android:name=".main.personalcenter.ModifyPasswordActivity" />
+        <activity android:name=".main.setting.AboutActivity"></activity>
     </application>
 
 </manifest>

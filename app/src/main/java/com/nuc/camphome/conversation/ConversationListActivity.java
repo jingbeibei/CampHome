@@ -232,7 +232,7 @@ public class ConversationListActivity extends AppCompatActivity implements Swipe
             super.onScrollStateChanged(recyclerView, newState);
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
-                    && mAdapter.isShowFooter()) {
+                    && mAdapter.isShowFooter() ) {
                 //加载更多
                 loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetConversationsURL);
             }

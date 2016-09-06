@@ -45,10 +45,11 @@ public class LetterDetailedActivity extends AppCompatActivity {
         letterTimeTV.setText(letter.getEntryTime().substring(0, 10));
         letterContentTV.setText(letter.getContents());
         String answer = letter.getAnswer();
-        String answertime = letter.getAnswerTime().substring(0, 10);
+        String answertime = letter.getAnswerTime();
         if (answertime != null) {
+
             answerTV.setText(answer);
-            answerTimeTV.setText(answertime);
+            answerTimeTV.setText(answertime.substring(1,10));
         }
 
     }

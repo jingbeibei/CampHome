@@ -202,7 +202,7 @@ public class SuggestListActivity extends AppCompatActivity implements SwipeRefre
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();//从0开始
         }
 
         @Override
@@ -210,9 +210,9 @@ public class SuggestListActivity extends AppCompatActivity implements SwipeRefre
             super.onScrollStateChanged(recyclerView, newState);
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
-                    && mAdapter.isShowFooter()) {
+                    &&mAdapter.isShowFooter() ) {
                 //加载更多
-                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetConversationsURL);
+                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetSuggestThemesURL);
             }
         }
     };

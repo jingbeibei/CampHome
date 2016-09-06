@@ -11,7 +11,10 @@ import android.widget.Toast;
 
 
 import com.nuc.camphome.R;
+import com.nuc.camphome.beans.Personnel;
 import com.nuc.camphome.main.ImageSlideshow.ImageSlideshow;
+import com.nuc.camphome.main.personalcenter.PersonalCenterFragment;
+import com.nuc.camphome.main.setting.SettingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +32,23 @@ public class PageFragment extends android.support.v4.app.Fragment {
     private List<String> imageUrlList;
     private List<String> titleList;
 
-    public static Fragment newInstance(int page) {
+    public static Fragment newInstance(int page, Personnel personnel) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
+        args.putSerializable("personnel",personnel);
         PageFragment pageFragment = new PageFragment();
+        PersonalCenterFragment pcf=new PersonalCenterFragment();
+        pcf.setArguments(args);
         if (page==1){
             return new HomeFragment();
         }
+        if(page==2){
+          return   pcf;
+        }
+        if(page==3){
+            return  new SettingFragment();
+        }
+
         pageFragment.setArguments(args);
         return pageFragment;
     }

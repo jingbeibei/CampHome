@@ -4,7 +4,7 @@ package com.nuc.camphome.commons;
  * Created by 景贝贝 on 2016/7/14.
  */
 public interface Urls {
-    public final static int PAZE_SIZE = 10;
+    public final static int PAZE_SIZE = 15;
     public final static String BaseUrl = "http://202.207.177.28:88/API/Interface/";
 
     public final static String RegisterUrl = BaseUrl + "Register?";
@@ -28,4 +28,8 @@ public interface Urls {
     public final static String GetMediasURL = BaseUrl + "GetMedias?";
     public final static String GetSuggestThemesURL = BaseUrl + "GetSuggestThemes?";
     public final static String PostSuggestURL = BaseUrl + "PostSuggest?";
+    public final static String GetColumnsURL = BaseUrl + "GetColumns?";
+    public final static String GetPapersByColumnURL = BaseUrl + "GetPapersByColumn?";
+    public final static String GetPaperURL = BaseUrl + "GetPaper?";
+
 }

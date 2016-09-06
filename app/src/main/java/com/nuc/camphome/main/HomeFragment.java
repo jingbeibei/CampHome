@@ -18,6 +18,8 @@ import com.google.gson.reflect.TypeToken;
 import com.nuc.camphome.R;
 import com.nuc.camphome.beans.BannerPic;
 import com.nuc.camphome.chat.ChatActivity;
+import com.nuc.camphome.column.ColumnListActivity;
+import com.nuc.camphome.column.ColumnsListActivity;
 import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.conversation.ConversationListActivity;
 import com.nuc.camphome.mailbox.ChiefMailboxActivity;
@@ -50,13 +52,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String times;
     private String code;
     private String username;
-    private int newsType_longhubang=1;//龙虎榜
-    private int newsType_junneiwai=2;//军内外新闻
-    private int newsType_paotuankuaixun=3;//炮团快讯
+    private int newsType_longhubang = 1;//龙虎榜
+    private int newsType_junneiwai = 2;//军内外新闻
+    private int newsType_paotuankuaixun = 3;//炮团快讯
 
-    private int medialType_wangluoketang=1;//网络课堂
-    private int medialType_zixuanjiaoyu=2;//自选教育
-    private int medialType_yuleyingyin=3;//娱乐影音
+    private int medialType_wangluoketang = 1;//网络课堂
+    private int medialType_zixuanjiaoyu = 2;//自选教育
+    private int medialType_yuleyingyin = 3;//娱乐影音
 
     public HomeFragment() {
         super();
@@ -91,6 +93,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     initData();
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
                 e.printStackTrace();
@@ -105,7 +108,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         };
         OkHttpUtils.post(getBannerURL, getBannerCallback, null);//获取banner图片url
-initView(view);
+        initView(view);
         return view;
     }
 
@@ -171,7 +174,7 @@ initView(view);
         ptzsIV = (ImageView) view.findViewById(R.id.ptzsIV);
         jnwxwIV = (ImageView) view.findViewById(R.id.jnwxwIV);
         jxIV = (ImageView) view.findViewById(R.id.jxIV);
-        ptkxIV= (ImageView) view.findViewById(R.id.ptkxIV);
+        ptkxIV = (ImageView) view.findViewById(R.id.ptkxIV);
         lhbIV = (ImageView) view.findViewById(R.id.lhbIV);
         szxxIV = (ImageView) view.findViewById(R.id.szxxIV);
         wlktIV = (ImageView) view.findViewById(R.id.wlktIV);
@@ -205,65 +208,71 @@ initView(view);
 
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        switch (id){
+        int id = view.getId();
+        switch (id) {
             case R.id.dztxIV://定制谈心
-                Intent intent=new Intent(getActivity(), ConversationListActivity.class);
-                intent.putExtra("type","2");
+                Intent intent = new Intent(getActivity(), ConversationListActivity.class);
+                intent.putExtra("type", "2");
                 startActivity(intent);
                 break;
             case R.id.zxjyIV://自选教育
-                Intent zxjyIntent=new Intent(getActivity(), MedialListActivity.class);
-                zxjyIntent.putExtra("type",medialType_zixuanjiaoyu+"");
+                Intent zxjyIntent = new Intent(getActivity(), MedialListActivity.class);
+                zxjyIntent.putExtra("type", medialType_zixuanjiaoyu + "");
                 startActivity(zxjyIntent);
 
                 break;
-            case R.id.ptzsIV:
+            case R.id.ptzsIV://炮团之声
+                Intent ptzsIntent = new Intent(getActivity(), ColumnListActivity.class);
+                ptzsIntent.putExtra("ColumnID", 21 + "");
+                ptzsIntent.putExtra("Title", "炮团之声");
+                startActivity(ptzsIntent);
                 break;
             case R.id.jnwxwIV://军内外新闻
-                Intent jnwxwIntent=new Intent(getActivity(), NewsListActivity.class);
-                jnwxwIntent.putExtra("type",newsType_junneiwai+"");
+                Intent jnwxwIntent = new Intent(getActivity(), NewsListActivity.class);
+                jnwxwIntent.putExtra("type", newsType_junneiwai + "");
                 startActivity(jnwxwIntent);
                 break;
             case R.id.jxIV://军信
-                Intent jxIntent=new Intent(getActivity(), ChatActivity.class);
-                jxIntent.putExtra("url",Urls.ChatURL+username);
+                Intent jxIntent = new Intent(getActivity(), ChatActivity.class);
+                jxIntent.putExtra("url", Urls.ChatURL + username);
                 startActivity(jxIntent);
                 break;
             case R.id.ptkxIV://炮团快讯
-                Intent ptkxIntent=new Intent(getActivity(), NewsListActivity.class);
-                ptkxIntent.putExtra("type",newsType_paotuankuaixun+"");
+                Intent ptkxIntent = new Intent(getActivity(), NewsListActivity.class);
+                ptkxIntent.putExtra("type", newsType_paotuankuaixun + "");
                 startActivity(ptkxIntent);
                 break;
             case R.id.lhbIV://龙虎榜
-                Intent lhbIntent=new Intent(getActivity(), NewsListActivity.class);
-               lhbIntent.putExtra("type",newsType_longhubang+"");
+                Intent lhbIntent = new Intent(getActivity(), NewsListActivity.class);
+                lhbIntent.putExtra("type", newsType_longhubang + "");
                 startActivity(lhbIntent);
                 break;
             case R.id.szxxIV://首长信箱
-                Intent szxxIntent=new Intent(getActivity(), ChiefMailboxActivity.class);
+                Intent szxxIntent = new Intent(getActivity(), ChiefMailboxActivity.class);
                 startActivity(szxxIntent);
                 break;
             case R.id.wlktIV://网络课堂
-                Intent wlktIntent=new Intent(getActivity(), MedialListActivity.class);
-                wlktIntent.putExtra("type",medialType_wangluoketang+"");
+                Intent wlktIntent = new Intent(getActivity(), MedialListActivity.class);
+                wlktIntent.putExtra("type", medialType_wangluoketang + "");
                 startActivity(wlktIntent);
                 break;
             case R.id.zxdcIV://在线调查
-                Intent zxdcIntent=new Intent(getActivity(), SuggestListActivity.class);
+                Intent zxdcIntent = new Intent(getActivity(), SuggestListActivity.class);
 
                 startActivity(zxdcIntent);
                 break;
             case R.id.xlfwIV://心理服务
-                Intent xlfwIntent=new Intent(getActivity(), ConversationListActivity.class);
-                xlfwIntent.putExtra("type","1");
+                Intent xlfwIntent = new Intent(getActivity(), ConversationListActivity.class);
+                xlfwIntent.putExtra("type", "1");
                 startActivity(xlfwIntent);
                 break;
-            case R.id.zsscIV:
+            case R.id.zsscIV://掌上书城
+                Intent zsscIntent = new Intent(getActivity(), ColumnsListActivity.class);
+                startActivity(zsscIntent);
                 break;
             case R.id.ylyyIV://娱乐影音
-                Intent ylyyIntent=new Intent(getActivity(), MedialListActivity.class);
-                ylyyIntent.putExtra("type",medialType_yuleyingyin+"");
+                Intent ylyyIntent = new Intent(getActivity(), MedialListActivity.class);
+                ylyyIntent.putExtra("type", medialType_yuleyingyin + "");
                 startActivity(ylyyIntent);
                 break;
 

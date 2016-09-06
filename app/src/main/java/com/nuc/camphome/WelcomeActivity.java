@@ -10,10 +10,13 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.nuc.camphome.beans.FlashPicture;
+import com.nuc.camphome.beans.Personnel;
 import com.nuc.camphome.commons.Urls;
 import com.nuc.camphome.main.LoginActivity;
 import com.nuc.camphome.main.MainActivity;
@@ -24,9 +27,16 @@ import com.nuc.camphome.utils.LogUtils;
 import com.nuc.camphome.utils.OkHttpUtils;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class WelcomeActivity extends AppCompatActivity {
     /**
@@ -46,6 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private String getAppidurl = "", getFlashPictureUrl = "";
     private ImageView flashIV;
     private OkHttpUtils.ResultCallback<String> getFlashPictureCallback = null;
+    private  Personnel personnel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +95,11 @@ public class WelcomeActivity extends AppCompatActivity {
                     applicationid = Integer.parseInt(response);
                     getFlashPictureUrl = Urls.GetLastFlashPicture + "times=" + times + "&code=" + code + "&applicationID=" + applicationid;
                     OkHttpUtils.post(getFlashPictureUrl, getFlashPictureCallback, null);
+                    try {
+                        post();//加载个人信息
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     applicationid = 1;
                 }
@@ -113,6 +129,7 @@ public class WelcomeActivity extends AppCompatActivity {
                                 .placeholder(R.mipmap.newestflashpic)
                                 .error(R.mipmap.newestflashpic)
                                 .into(flashIV);
+
                     }
 
                 } catch (ParseException e) {
@@ -148,7 +165,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
 
                 } else {
-                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+
+                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class).putExtra("personnel",personnel));
 
                 }
 
@@ -165,4 +183,28 @@ public class WelcomeActivity extends AppCompatActivity {
         mSplashThread.start();
 
     }
+
+    public void post() throws IOException {
+        String url = Urls.GetPsersonnelURL + "times=" + times + "&code=" + code + "&applicationID=" + applicationid + "&username=" + username;
+        OkHttpUtils.ResultCallback<String> loadPersonnelCallback = new OkHttpUtils.ResultCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                if(response.indexOf("PictureUrl")>0){
+                     personnel= JsonUtils.deserialize(response,Personnel.class);
+                    Log.i("个人信息",personnel.getPictureUrl());
+                }else {
+                    Toast.makeText(getApplication(),"加载个人信息失败..1.",Toast.LENGTH_LONG);
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                LogUtils.e("modelImple","加载个人信息失败");
+                e.printStackTrace();
+                Toast.makeText(getApplication(),"加载个人信息失败..1.",Toast.LENGTH_LONG);
+            }
+        };
+        OkHttpUtils.post(url,loadPersonnelCallback,null);
+    }
+
 }

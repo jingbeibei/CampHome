@@ -170,7 +170,11 @@ public class ChiefMailboxActivity extends AppCompatActivity implements SwipeRefr
         }
         mData.addAll(letterList);
         if (pageIndex == 1) {
+            if(letterList.size()<=Urls.PAZE_SIZE){
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmDate(mData);
+
         } else {
             //如果没有更多数据了,则隐藏footer布局
             if (letterList == null || letterList.size() == 0) {
@@ -219,9 +223,9 @@ public class ChiefMailboxActivity extends AppCompatActivity implements SwipeRefr
             super.onScrollStateChanged(recyclerView, newState);
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
-                    && mAdapter.isShowFooter()) {
+                    ) {
                 //加载更多
-                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetConversationsURL);
+                loadDate(pageIndex, Urls.PAZE_SIZE, Urls.GetLetterURL);
             }
         }
     };

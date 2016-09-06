@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.nuc.camphome.column.PaperDetailedActivity">
+
+    <include layout="@layout/toolbar_mybar"></include>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/paper_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="标题"
+        android:background="#ffffff"
+        android:textSize="@dimen/textsize_25sp" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+       android:layout_centerInParent="true"
+        android:visibility="visible"
+         />
+
+    <WebView
+        android:layout_below="@id/paper_title_tv"
+        android:layout_marginTop="10dp"
+        android:id="@+id/paper_content_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+</RelativeLayout>
+</LinearLayout>
