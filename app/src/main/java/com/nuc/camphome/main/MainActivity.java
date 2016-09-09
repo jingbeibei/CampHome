@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.nuc.camphome.R;
 import com.nuc.camphome.beans.Personnel;
+import com.nuc.camphome.utils.ActivityCollector;
 
 /**
  * Created by 景贝贝 on 2016/8/18.
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityCollector.addActivity(this);
       personnel= (Personnel) getIntent().getSerializableExtra("personnel");
         pagerAdapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), this,personnel);
         viewPager = (ViewPager) findViewById(R.id.viewpager);

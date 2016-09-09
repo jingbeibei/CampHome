@@ -60,6 +60,7 @@ public class PersonalCenterFragment extends Fragment implements View.OnClickList
         super.onCreate(savedInstanceState);
         personnel = (Personnel) getArguments().getSerializable("personnel");
         pref = getActivity().getSharedPreferences("data", getContext().MODE_PRIVATE);
+        editor = pref.edit();
         times = GetTimesAndCode.getTimes();
         code = GetTimesAndCode.getCode(times);
         applicationid = pref.getLong("applicationID", 1);
