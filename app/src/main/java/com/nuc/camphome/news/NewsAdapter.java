@@ -73,6 +73,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .placeholder(R.mipmap.banner_error)
                         .error(R.mipmap.banner_error)
                         .into(((ItemViewHolder) holder).titleImageView);
+            }else {
+                ((ItemViewHolder) holder).titleImageView.setVisibility(View.GONE);
             }
 
 //            Uri uri = Uri.parse(news.getImgsrc());

@@ -54,6 +54,7 @@
         <activity android:name=".main.personalcenter.ModifyDateActivity" />
         <activity android:name=".main.personalcenter.ModifyPasswordActivity" />
         <activity android:name=".main.setting.AboutActivity"></activity>
+        <service android:name=".main.setting.receiver.UpdateService"></service>
     </application>
 
 </manifest>
